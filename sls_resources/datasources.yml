@@ -1,0 +1,20 @@
+listBooks:
+  type: 'AWS_LAMBDA'
+  config:
+    function:
+      timeout: 30
+      handler: 'src/handler/ListBook.handler'
+
+getBookByTitle:
+  type: 'AWS_LAMBDA'
+  config:
+    function:
+      timeout: 30
+      handler: 'src/handler/GetBookByTitle.handler'
+
+addBook:
+  type: 'AWS_LAMBDA'
+  config:
+    function:
+      timeout: 30
+      handler: 'src/handler/AddBook.handler'

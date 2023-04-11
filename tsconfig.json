@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "handler/*": ["src/handler/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*",
+    ".idea/**/*",
+    "dist/**/*",
+    "tests/**/*",
+    "**/**/*.test.ts"
+  ]
+}

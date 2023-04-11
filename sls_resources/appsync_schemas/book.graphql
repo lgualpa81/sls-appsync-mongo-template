@@ -1,0 +1,28 @@
+# Entities
+type Book {
+  id: ID!
+  title: String
+}
+
+input BookInput {
+  title: String!
+}
+# Define the queries
+type Query {
+  listBooks: [Book]
+  @aws_cognito_user_pools(cognito_groups: ["admin"])
+  @aws_auth(cognito_groups: ["admin"])
+  getBookByTitle(title: String): [Book]
+}
+
+type Mutation {
+  addBook(input: BookInput!): Book
+  update(input: BookInput!): Book
+}
+
+# Define the schema
+schema {
+  # all the queries
+  query: Query
+  mutation: Mutation
+}

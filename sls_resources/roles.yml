@@ -1,0 +1,24 @@
+Resources:
+  AppSyncServiceRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: ${self:custom.defaultPrefix}-${self:appSync.serviceRole}
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "appsync.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: ${self:custom.defaultPrefix}-${self:appSync.serviceRole}-Policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - lambda:*
+                Resource:
+                  - arn:aws:lambda:${self:provider.region}:*:*

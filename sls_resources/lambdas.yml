@@ -1,0 +1,8 @@
+listBooks:
+  handler: src/handler/ListBook.handler
+
+addBook:
+  handler: src/handler/AddBook.handler
+
+getBookByTitle:
+  handler: src/handler/GetBookByTitle.handler

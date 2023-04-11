@@ -1,0 +1,13 @@
+Query.listBooks:
+  kind: UNIT
+  dataSource: listBooks
+  #request: "sls_resources/mapping-templates/query.listBooks-request.vtl"
+  #response: "sls_resources/mapping-templates/common-response.vtl"
+
+Query.getBookByTitle:
+  kind: UNIT
+  dataSource: getBookByTitle
+
+Mutation.addBook:
+  kind: UNIT
+  dataSource: addBook

@@ -1,0 +1,32 @@
+{
+  "name": "appsync-mongo-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codegen": "graphql-codegen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "6.2.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^3.3.0",
+    "@graphql-codegen/typescript": "^3.0.3",
+    "@types/aws-lambda": "^8.10.114",
+    "@types/jsonpath": "0.2.0",
+    "browserify": "^17.0.0",
+    "jsonpath": "1.1.1",
+    "serverless": "3.23.0",
+    "serverless-appsync-plugin": "2.2.0",
+    "serverless-bundle": "^6.0.0",
+    "serverless-offline": "8.8.0",
+    "serverless-plugin-aws-alerts": "^1.7.5",
+    "serverless-plugin-browserifier": "^3.1.1",
+    "serverless-prune-plugin": "^2.0.2",
+    "typescript": "3.9.7"
+  }
+}

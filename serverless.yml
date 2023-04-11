@@ -1,0 +1,78 @@
+service: sls-appsync-mongo
+#configValidationMode: error
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 128
+  region: ${env:REGION, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+  timeout: 29
+  logRetentionInDays: 1
+
+  #Enviroment variables
+  environment:
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    APPSYNC_NAME: ${self:custom.defaultPrefix}-api
+    MONGO_URL: 'YOUR_MONGO_URL_STRING'
+
+  #IAM statements
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - lambda:invokeFunction
+          Resource:
+            - arn:aws:lambda:${self:provider.region}:*:*
+package:
+  individually: true
+  excludeDevDependencies: true
+
+appSync:
+  name: ${self:provider.environment.APPSYNC_NAME}
+  ####################################
+  #Auth mode: API KEY
+  ####################################
+  # apiKeys:
+  #   - name: monthlyKey
+  #     expiresAfter: 1M
+  # authentication:
+  #   type: API_KEY
+
+
+  ####################################
+  #Auth mode: USER POOLS
+  ####################################
+  authentication:
+    type: 'AMAZON_COGNITO_USER_POOLS'
+    config:
+      userPoolId: 'YOUR_USER_POOL_ID'
+
+  schema: "sls_resources/appsync_schemas/*.graphql"
+
+  dataSources: ${file(sls_resources/datasources.yml)}
+  resolvers: ${file(sls_resources/resolvers.yml)}
+  logging:
+    level: NONE
+    retentionInDays: 1
+
+plugins:
+  - serverless-appsync-plugin
+  - serverless-offline
+  - serverless-bundle
+  - serverless-prune-plugin
+  - serverless-plugin-aws-alerts
+  #- serverless-plugin-browserifier
+
+custom:
+  defaultPrefix: ${self:service}-${self:provider.stage}
+  alerts:
+    dashboards: true
+
+functions:
+  - ${file(sls_resources/lambdas.yml)}
+
+# resources:
+#   # Roles
+#   - ${file(sls_resources/roles.yml)}
